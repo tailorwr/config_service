@@ -1,0 +1,86 @@
+server.port=8097
+server.servlet.context-path=/
+
+java.awt.headless=true
+
+# Spring Application
+spring.main.allow-bean-definition-overriding=true
+spring.main.web-application-type=reactive
+spring.security.oauth2.resourceserver.jwt.issuer-uri=https://authqa.tailorw.net/realms/TailorwRealm
+spring.security.oauth2.resourceserver.jwt.jwk-set-uri=https://authqa.tailorw.net/realms/TailorwRealm/protocol/openid-connect/certs
+spring.security.oauth2.client.provider.keycloak.token-uri=https://authqa.tailorw.net/realms/TailorwRealm/protocol/openid-connect/token
+
+# Para usar SMTP
+#spring.profiles.active=smtp
+#
+## Para usar Mailjet
+#spring.profiles.active=mailjet
+
+# Claves API de Mailjet
+mailjet.apiKey=${MAILJET_KEY}
+mailjet.apiSecret=${MAILJET_SECRET}
+
+# Dirección de correo electrónico y nombre desde donde se enviarán los correos
+mailjet.fromEmail=it@ublik.net
+mailjet.fromName=KYNSOFT
+
+
+eureka.instance.hostname=registry
+eureka.client.service-url.defaultZone=http://registry-service:8761/eureka
+eureka.instance.preferIpAddress=true
+spring.cloud.gateway.discovery.locator.enabled=true
+
+# JWT Configuration
+jwt.auth.converter.resource-id=medinec
+jwt.auth.converter.principle-attribute=preferred_username
+
+# HTTP and CORS Configuration
+http.cors-enabled=true
+http.cors.allowed-origins=http://localhost:8080,http://localhost:5173,https://medinec-admin.kynsoft.net
+http.cors.allowed-methods=*
+http.cors.allowed-headers=*
+http.cors.exposed-headers=*
+http.cors.allow-credentials=true
+http.cors.max-age=3600
+
+# Springdoc Swagger UI Configuration
+springdoc.swagger-ui.path=/swagger-ui.html
+
+# Management Endpoints Configuration
+management.endpoints.web.exposure.include=openapi,swagger-ui
+
+#S3 File
+aws.accessKey=${AWS_ACCESS_KEY}
+aws.secretKey=${AWS_ACCESS_SECRET}
+aws.bucketUrl=https://0d6283e1864227f7c11cd14328e3dcb1.r2.cloudflarestorage.com
+aws.bucketName=medinec
+aws.region=us-east-1
+aws.cloudfront.domain=https://static.kynsoft.net/
+spring.datasource.initialization-mode=always
+
+#datasource
+spring.jpa.database=default
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.generate-ddl=true
+spring.jpa.show-sql=true
+
+spring.datasource.driverClassName=org.postgresql.Driver
+spring.datasource.url=${DB_HOST_RW}
+spring.datasource.username=${DB_USER_RW}
+spring.datasource.password=${DB_PASSWORD_RW}
+spring.datasource.minimum-idle=2
+spring.datasource.maximum-pool-size=2
+
+spring.read-datasource.driverClassName=org.postgresql.Driver
+spring.read-datasource.url=${DB_HOST_R}
+spring.read-datasource.username=${DB_USER_R}
+spring.read-datasource.password=${DB_PASSWORD_RO}
+spring.read-datasource.minimum-idle=2
+spring.read-datasource.maximum-pool-size=2
+
+#Payment
+payment.service.host=payment
+payment.service.client-id=669ed63c-5af0-4afc-a45c-9f1369f58cfb
+payment.service.expiration=15
+payment.service.port=8080
